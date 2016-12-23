@@ -16,7 +16,7 @@ use Hprose;
 
 class HproseServiceProvider extends ServiceProvider
 {
-    protected $defer = false;
+    protected $defer = true;
 
     public function boot()
     {
@@ -31,23 +31,38 @@ class HproseServiceProvider extends ServiceProvider
 
         // 设置别名
         $loader = AliasLoader::getInstance();
-        $loader->alias('HproseClient', 'Lao-liu\LaravelHprose\HproseClientFacade');
-        $loader->alias('HproseServer', 'Lao-liu\LaravelHprose\HproseServerFacade');
+        $loader->alias('HproseClient', 'Laoliu\LaravelHprose\HproseClientFacade');
+        $loader->alias('HproseServer', 'Laoliu\LaravelHprose\HproseServerFacade');
+        $loader->alias('HproseService', 'Laoliu\LaravelHprose\HproseServiceFacade');
     }
 
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/hprose.php', 'hprose');
-        $this->app->singleton('HproseClient', function(){
+
+        $this->app->singleton('HproseService', function(){
+            return new Hprose\Http\Service();
+        });
+
+        $this->app->bind('HproseClient', function(){
             $options = $this->app["config"]->get("hprose.client");
             $client = new HproseClientWrapper($options);
             return $client;
         });
 
-        $this->app->bind('HproseServer', function($app, $params=[]){
+        $this->app->bind('HproseServer', function(){
             $options = $this->app["config"]->get("hprose.server");
-            $class = \ReflectionClass(Hprose\Http\Server::class);
-            $server = $class->newInstanceArgs($params);
+            $server = new Hprose\Http\Server();
+
+            if(is_array($options) && count($options)){
+                foreach ($options as $k => $option) {
+                    $setMethod = 'set' . $k;
+                    if (method_exists($server, $setMethod) && $option){
+                        $server->$setMethod($option);
+                    }
+                }
+            }
+
             return $server;
         });
     }
