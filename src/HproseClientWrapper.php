@@ -56,10 +56,12 @@ class HproseClientWrapper
             $client = new Hprose\Http\Client(key($UriList), $UriList[key($UriList)]);
         }
 
-        foreach ($opts['headers'] as $key => $value)
+        foreach ($opts['setup']['Header'] as $key => $value)
             $client->setHeader($key, $value);
 
-        $client->proxy = $opts['proxy'];
+        if(isset($opts['setup']['Proxy']) && $opts['setup']['Proxy']){
+            $client->proxy = $opts['setup']['Proxy'];
+        }
 
         return $client;
     }
