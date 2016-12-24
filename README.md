@@ -12,9 +12,6 @@ It is not only easy to use, but powerful.
 ```
 # composer
 composer require lao-liu/laravel-hprose
-
-# Laravel config
-php artisan vendor:publish --provider="Laoliu\LaravelHprose\HproseServiceProvider"
 ```
 
 ## Configuration
@@ -28,16 +25,19 @@ php artisan vendor:publish --provider="Laoliu\LaravelHprose\HproseServiceProvide
 # include the provider
 'providers' => [
     [...]
-    'Laoliu\LaravelHprose\HproseServiceProvider',
+    Laoliu\LaravelHprose\HproseServiceProvider::class,
 ];
 
 # include the alias
 'aliases' => [
     [...]
-    'RpcClient'  => 'Laoliu\LaravelHprose\HproseClientFacade',
-    'RpcServer'  => 'Laoliu\LaravelHprose\HproseServerFacade',
-    'RpcService' => 'Laoliu\LaravelHprose\HproseServiceFacade',
+    'RpcClient'    => Laoliu\LaravelHprose\HproseClientFacade::class,
+    'RpcServer'    => Laoliu\LaravelHprose\HproseServerFacade::class,
+    'RpcService'   => Laoliu\LaravelHprose\HproseServiceFacade::class,
 ];
+
+# Laravel config
+php artisan vendor:publish --provider="Laoliu\LaravelHprose\HproseServiceProvider"
 ```
 
 ## Usage
