@@ -31,9 +31,9 @@ class HproseServiceProvider extends ServiceProvider
 
         // 设置别名
         $loader = AliasLoader::getInstance();
-        $loader->alias('HproseClient', 'Laoliu\LaravelHprose\HproseClientFacade');
-        $loader->alias('HproseServer', 'Laoliu\LaravelHprose\HproseServerFacade');
-        $loader->alias('HproseService', 'Laoliu\LaravelHprose\HproseServiceFacade');
+        $loader->alias('RpcClient', 'Laoliu\LaravelHprose\HproseClientFacade');
+        $loader->alias('RpcServer', 'Laoliu\LaravelHprose\HproseServerFacade');
+        $loader->alias('RpcService', 'Laoliu\LaravelHprose\HproseServiceFacade');
     }
 
     public function register()
@@ -81,6 +81,6 @@ class HproseServiceProvider extends ServiceProvider
 
     public function provides()
     {
-        return ["HproseClient", "HproseServer"];
+        return ["RpcClient", "RpcServer", "RpcService"];
     }
 }

@@ -46,6 +46,7 @@ class HproseClientWrapper
         $opts = $this->config;
         if(!count($opts["setup"]["UriList"])){
             if(filter_var($opts['url'], FILTER_VALIDATE_URL)){
+                if(!isset($opts['async'])) $opts['async'] = false;
                 $client = new Hprose\Http\Client($opts['url'], $opts['async']);
             } else {
                 trigger_error("Hprose 接口地址必须设置");

@@ -17,6 +17,6 @@ class HproseClientFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return "HproseClient";
+        return "RpcClient";
     }
 }
