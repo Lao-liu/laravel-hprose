@@ -40,17 +40,17 @@ class HproseServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/hprose.php', 'hprose');
 
-        $this->app->singleton('HproseService', function(){
+        $this->app->singleton('RpcService', function(){
             return new Hprose\Http\Service();
         });
 
-        $this->app->bind('HproseClient', function(){
+        $this->app->bind('RpcClient', function(){
             $options = $this->app["config"]->get("hprose.client");
             $client = new HproseClientWrapper($options);
             return $client;
         });
 
-        $this->app->bind('HproseServer', function(){
+        $this->app->bind('RpcServer', function(){
             $options = $this->app["config"]->get("hprose.server");
             $server = new Hprose\Http\Server();
 
