@@ -1,8 +1,8 @@
 {
     "name": "lao-liu/laravel-hprose",
     "description": "Hprose client/server providers for Laravel 5.x",
-    "keywords": ["Hprose", "laravel"],
-    "version":"0.8.5",
+    "keywords": ["Hprose", "laravel", "Rpc", "JsonRpc", "XmlRpc"],
+    "version":"0.8.6",
     "license": "MIT",
     "authors": [
         {
