@@ -54,28 +54,13 @@ $result = Rpc::someServerMethod($params);
 ```php
 Route::any('/api', function() {
     $server = app('RpcServer');
-    $server->addInstanceMethods(new \App\Services\SomeHprosePublishServices());
-    $server->start();
-});
-```
-
-### JsonRPC server
-
-```php
-Route::any('/api/json', function() {
-    $server = app('RpcServer');
-    $server->addFilter(new Hprose\Filter\JSONRPC\ServiceFilter());
-    $server->addInstanceMethods(new \App\Services\SomeHprosePublishServices());
-    $server->start();
-});
-```
-
-### XmlRPC server
-
-```php
-Route::any('/api/xml', function() {
-    $server = app('RpcServer');
+    
+    // Hprose support XmlRPC and JsonRPC
+    // if want support XmlRpc
     $server->addFilter(new Hprose\Filter\XMLRPC\ServiceFilter());
+    // if want support JsonRpc
+    $server->addFilter(new Hprose\Filter\JSONRPC\ServiceFilter());
+    
     $server->addInstanceMethods(new \App\Services\SomeHprosePublishServices());
     $server->start();
 });
