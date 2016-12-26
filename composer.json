@@ -1,8 +1,8 @@
 {
     "name": "lao-liu/laravel-hprose",
-    "description": "Hprose client/server providers for Laravel 5.x",
-    "keywords": ["Hprose", "laravel", "Rpc", "JsonRpc", "XmlRpc"],
-    "version":"0.8.6",
+    "description": "Hprose client/server providers for Laravel 5.x or Lumen 5.x",
+    "keywords": ["Hprose", "laravel", "lumen", "Rpc", "webservice", "JsonRpc", "XmlRpc"],
+    "version":"0.9.0",
     "license": "MIT",
     "authors": [
         {
@@ -23,12 +23,16 @@
     "autoload": {
         "psr-4": {
             "Laoliu\\LaravelHprose\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php"
         ]
     },
+    "minimum-stability": "dev",
     "prefer-stable": true
 }

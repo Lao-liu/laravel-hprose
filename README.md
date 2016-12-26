@@ -1,4 +1,4 @@
-# Hprose for laravel 5.x
+# Hprose for laravel and lumen 5.x
 
 Hprose [https://github.com/hprose](https://github.com/hprose)
 
@@ -14,14 +14,12 @@ It is not only easy to use, but powerful.
 composer require lao-liu/laravel-hprose
 ```
 
-## Configuration
+## For Laravel 5.x
 
-```
-# config/hprose.php
-```
+### Configuration
 
 ```php
-# app/config/app.php
+# edit app/config/app.php
 # include the provider
 'providers' => [
     [...]
@@ -39,17 +37,22 @@ composer require lao-liu/laravel-hprose
 # Laravel config
 php artisan vendor:publish --provider="Laoliu\LaravelHprose\HproseServiceProvider"
 ```
+config file
 
-## Usage
+```
+# config/hprose.php
+```
 
-### Hprose client
+### Usage for laravel
+
+#### Hprose client
 
 ```php
 use RpcClient as Rpc;
 $result = Rpc::someServerMethod($params);
 ```
 
-### Hprose server
+#### Hprose server
 
 ```php
 Route::any('/api', function() {
@@ -74,6 +77,49 @@ Route::any('/api', function() {
 protected $except = [
     'api' // OR 'api*'
 ];
+```
+Done.
+
+## For Lumen 5.x
+
+### Configuration
+
+```php
+# edit bootstrap/app.php
+$app->register(Laoliu\LaravelHprose\HproseServiceProvider::class);
+
+[...]
+
+class_alias('Laoliu\LaravelHprose\HproseClientFacade', 'RpcClient');
+class_alias('Laoliu\LaravelHprose\HproseServerFacade', 'RpcServer');
+class_alias('Laoliu\LaravelHprose\HproseServiceFacade', 'RpcService');
+
+return $app;
+```
+### Usage for lumen
+
+#### Hprose client
+
+```php
+$rpc = app('RpcClient')->use('http://hproseServiceUrl/', $async);
+$result = $rpc->remoteMethods($params);
+```
+
+#### Hprose server
+
+```php
+Route::any('/api', function() {
+    $server = app('RpcServer');
+    
+    // Hprose support XmlRPC and JsonRPC
+    // if want support XmlRpc
+    $server->addFilter(new Hprose\Filter\XMLRPC\ServiceFilter());
+    // if want support JsonRpc
+    $server->addFilter(new Hprose\Filter\JSONRPC\ServiceFilter());
+    
+    $server->addInstanceMethods(new \App\Services\SomeHprosePublishServices());
+    $server->start();
+});
 ```
 
 ### API Reference
