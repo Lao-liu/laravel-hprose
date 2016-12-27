@@ -2,7 +2,7 @@
     "name": "lao-liu/laravel-hprose",
     "description": "Hprose client/server providers for Laravel 5.x or Lumen 5.x",
     "keywords": ["Hprose", "laravel", "lumen", "Rpc", "webservice", "JsonRpc", "XmlRpc"],
-    "version":"0.9.0",
+    "version":"0.9.1",
     "license": "MIT",
     "authors": [
         {
