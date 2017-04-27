@@ -101,7 +101,7 @@ return $app;
 #### Hprose client
 
 ```php
-$rpc = app('RpcClient')->use('http://hproseServiceUrl/', $async);
+$rpc = app('RpcClient')->useService('http://hproseServiceUrl/', $async);
 $result = $rpc->remoteMethods($params);
 ```
 

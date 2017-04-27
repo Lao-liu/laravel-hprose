@@ -82,7 +82,7 @@ class HproseClientWrapper
         );
     }
 
-    public function use($url, $async)
+    public function useService($url, $async)
     {
         return new Hprose\Http\Client($url, $async);
     }
