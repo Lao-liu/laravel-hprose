@@ -32,7 +32,7 @@ class HproseClientWrapper
 
     public function configure($options)
     {
-        $this->config = array_merge($this->config, $options);
+        $this->config = array_replace_recursive($this->config, $options);
     }
 
     public function connection()
