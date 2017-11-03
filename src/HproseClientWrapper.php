@@ -78,7 +78,7 @@ class HproseClientWrapper
 
         return call_user_func_array(
             [$this->connection(), $method],
-            [$method, $params]
+            $params
         );
     }
 
